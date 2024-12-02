@@ -1,0 +1,99 @@
+.chat-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #1e293b;
+}
+
+.textarea-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+.textarea {
+    flex: 1;
+    padding: 10px;
+    background-color: #1e293b;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+}
+
+/* Botão arredondado com ícone estilizado */
+.send-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.send-button:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.send-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Estilizando o ícone de seta com bordas */
+.send-button::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-top: 4px solid white;
+    border-right: 4px solid white;
+    transform: rotate(45deg);
+}
+
+/* Parte do traço da seta */
+.send-button::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    background-color: white;
+    transform: translateX(-6px);
+}
+
+/* Mensagem de erro */
+.error {
+    color: #ff6b6b;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Spinner animado */
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    border-top: 3px solid #45a049;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animação do spinner */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

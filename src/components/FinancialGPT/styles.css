@@ -1,0 +1,57 @@
+.list-item {
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.list-item.user {
+  background-color: #d9f7be;
+  text-align: right;
+}
+
+.list-item.assistant {
+  background-color: #e6f7ff;
+}
+
+/* Estilo base para Markdown */
+.markdown-content {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Negrito */
+.markdown-content strong {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Tabelas */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Ajustes para listas e parágrafos */
+.markdown-content ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.markdown-content p {
+  margin: 0.5em 0;
+}

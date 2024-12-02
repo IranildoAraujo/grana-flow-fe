@@ -1,0 +1,13 @@
+.list-item {
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  .list-item.user {
+    background-color: #d9f7be;
+    text-align: right;
+  }
+  .list-item.assistant {
+    background-color: #e6f7ff;
+  }
+  

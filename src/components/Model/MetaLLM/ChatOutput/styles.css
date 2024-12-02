@@ -1,0 +1,23 @@
+/* ChatOutput com scroll automático */
+.chat-output {
+  flex: 1; /* Ocupa o espaço disponível */
+  overflow-y: auto; /* Adiciona scroll vertical */
+  padding: 10px;
+  background-color: #1e293b;
+  border-radius: 8px;
+}
+
+/* Output do modelo */
+/*.chat-output,*/
+.verbose-logs {
+  background-color: #012a42;
+  padding: 15px;
+  border: 1px solid #2ba5d4;
+  border-radius: 4px;
+  /*overflow: auto;*/
+}
+
+.chat-output pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

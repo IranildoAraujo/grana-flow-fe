@@ -1,0 +1,57 @@
+:root {
+  --title-white: #ffffff;
+  --bg-blue: blue;
+  --bg-green: green;
+}
+
+.flex-container-layout {
+  display: flex; /* Torna o container um flex container */
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.flex-content {
+  margin: 30px;
+  background: var(--bg-green);
+}
+
+.flex-layout-header {
+  height: 6vh;
+  align-content: flex-start;
+  background: var(--bg-blue);
+}
+
+.flex-header {
+  order: 0;
+}
+
+.flex-dollar {
+  order: 1;
+  font-size: 24px;
+  margin-right: 6px; 
+  color: var(--title-white);
+}
+
+.flex-header-title {
+  order: 2;
+  color: var(--title-white) !important;
+}
+
+.sider-header {
+  /* ... outros estilos ... */
+  white-space: nowrap; /* Impede a quebra de linha do título */
+  overflow: hidden;      /* Oculta o texto que excede a largura */
+  text-overflow: ellipsis; /* Adiciona "..." ao final do texto truncado */
+}
+
+.sider {
+  overflow: auto;
+  height: 100vh;
+  position: fixed; /* Fixar o Sider à esquerda  */
+  left: 0;
+  top: 0; /* Posicionar abaixo do Header */
+  bottom: 0;
+  z-index: 1;  /* Certificar-se de que o Sider fica sobre o conteúdo */
+
+  flex: 0 0 200px; /* Largura fixa de 200px, não cresce ou diminui */
+}
