@@ -110,6 +110,6 @@ LANGCHAIN_API_KEY==##########
 ```
 	npm start -- --reset-cache
 ```
+![Grana-Flow-Fe](https://github.com/user-attachments/assets/563bd9f7-2120-46f6-9eaf-3c375bc31276)
 
-![12e705b26146a7aa6b86012ee13e9fe6.png](../../_resources/12e705b26146a7aa6b86012ee13e9fe6.png)
 
