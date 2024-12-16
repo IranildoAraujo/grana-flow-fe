@@ -23,7 +23,7 @@ const FinancialGPT: React.FC = () => {
 
   const financialData = lancamentos.map(item => {
     return `${item.tipoCusto}: R$${item.valorCusto.toFixed(2)} registrado em ${new Date(
-      item.ultimoCustoRegistrado
+      item.dataRegistro
     ).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}`
   }).join("\n");
 

@@ -5,9 +5,12 @@ import { Table } from 'antd';
 import { Lancamento } from '../dto/lancamento-dto';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { updateLancamento, updateError } from '../../store/slices/lancamento';
+import { useAuthenticatedHttpClient } from '../../hooks';
 import './styles.css';
 
 const TableGranaFlow: React.FC = () => {
+    const httpClient = useAuthenticatedHttpClient();
+
     const API_URL = 'http://localhost:8080/grana-flow/api/v1/lancamentos';
 
     const [lancamentos, setLancamentos] = useState<Lancamento[]>([]);
@@ -17,11 +20,11 @@ const TableGranaFlow: React.FC = () => {
 
     const buscarLancamentos = useCallback(async () => {
         try {
-            const response = await axios.get<Lancamento[]>(API_URL);
+            const response = await httpClient.get<Lancamento[]>(API_URL);
             const lancamentos = response.data.map(l => ({
                 ...l,
-                ultimoCustoRegistrado: new Date(l.ultimoCustoRegistrado) // Converte para Date
-            })) as Lancamento[];
+                dataRegistro: new Date(l.dataRegistro) // Converte para Date
+            })) as unknown as Lancamento[];
             setLancamentos(lancamentos);
             dispatch(updateLancamento(lancamentos));
         } catch (error) {
@@ -43,8 +46,8 @@ const TableGranaFlow: React.FC = () => {
         },
         {
             title: 'Data do Lançamento',
-            dataIndex: 'ultimoCustoRegistrado',
-            key: 'ultimoCustoRegistrado',
+            dataIndex: 'dataRegistro',
+            key: 'dataRegistro',
             render: (data: Date) => data.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' }), // Formatar data
         },
     ];

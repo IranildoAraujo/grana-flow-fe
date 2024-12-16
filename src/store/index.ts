@@ -3,13 +3,15 @@ import lancamentoReducer from './slices/lancamento';
 import formGranaFlowReducer from './slices/formgranaflow'
 import chatInputReducer from './slices/chatInput';
 import metaLLMReducer from './slices/metaLLM';
+import autenticacaoReducer from './slices/autenticacao'
 
 export const store = configureStore({
   reducer: {
     lancamentoStore: lancamentoReducer,
     formGranaFlowStore: formGranaFlowReducer,
     chatInputStore: chatInputReducer,
-    metaLLMStore: metaLLMReducer
+    metaLLMStore: metaLLMReducer,
+    autenticacaoStore: autenticacaoReducer
   },
 });
 

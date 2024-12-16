@@ -5,17 +5,20 @@ import { CurrencyInput } from '../../CurrencyInput';
 import { useAppDispatch } from '../../../store/hooks';
 import { updateOnSaved } from '../../../store/slices/formgranaflow';
 import './styles.css';
+import { useAuthenticatedHttpClient } from '../../../hooks';
+import { Tipo } from '../../dto/tipo-dto';
 
 const { Option } = Select;
 
 const FormGranaFlow: React.FC = () => {
-  const [tiposCustos, setTiposCustos] = useState<string[]>([]);
+  const httpClient = useAuthenticatedHttpClient();
+  const [tiposCustos, setTiposCustos] = useState<Tipo[]>([]);
   const [tipoCustoSelecionado, setTipoCustoSelecionado] = useState<string | undefined>(undefined);
   const [valorCusto, setValorCusto] = useState<string>('');
   const dispatch = useAppDispatch();
 
   const handleTiposCustos = () => {
-    axios.get('http://localhost:8080/grana-flow/api/v1/lancamentos/tipos-custos')
+    httpClient.get<Tipo[]>('http://localhost:8080/grana-flow/api/v1/lancamentos/tipos-custos')
       .then(response => {
         setTiposCustos(response.data);
       })
@@ -62,7 +65,7 @@ const FormGranaFlow: React.FC = () => {
       <Form.Item label="Tipo de Custo">
         <Select placeholder="Selecione o tipo de custo" onChange={(e) => handleTipoCustoChange(e)} value={tipoCustoSelecionado}>
           {tiposCustos.map(tipoCusto => (
-            <Option key={tipoCusto} value={tipoCusto}>{tipoCusto}</Option>
+            <Option key={tipoCusto.name} value={tipoCusto.name}>{tipoCusto.descricao}</Option>
           ))}
         </Select>
       </Form.Item>

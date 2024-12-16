@@ -8,17 +8,24 @@ import reportWebVitals from './reportWebVitals';
 import 'antd/dist/reset.css'; // para o antd 5+
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  <React.StrictMode>
   <Provider store={store}>
-    <React.StrictMode>
+    <BrowserRouter
+     future={{
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    }}>
       <App />
-    </React.StrictMode>
+    </BrowserRouter>
   </Provider>
+  </React.StrictMode>
 );
 
 reportWebVitals();
