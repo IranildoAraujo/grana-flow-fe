@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../util/URLUtil/URLUtil';
 
 interface Lancamento {
   id?: number;
@@ -14,7 +15,6 @@ const AIGranaflow: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const API_URL = 'http://localhost:8080/grana-flow/api/v1/lancamentos';
   const HUGGINGFACE_API_KEY = process.env.REACT_APP_HUGGINGFACE_API_KEY; // Certifique-se de configurar isso no seu .env
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const AIGranaflow: React.FC = () => {
 
   const buscarLancamentos = async () => {
     try {
-      const response = await axios.get<Lancamento[]>(API_URL);
+      const response = await axios.get<Lancamento[]>(`${API_BASE_URL}/lancamentos`);
       setLancamentos(response.data);
       if (response.data.length > 0) {
         gerarResumo(response.data);

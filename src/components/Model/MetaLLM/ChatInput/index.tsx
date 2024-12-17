@@ -10,10 +10,10 @@ const ChatInput: React.FC = () => {
 
   const handleSubmit = () => {
     if (input || input.trim() !== "") {
-      dispatch(updateError("")); // Clear previous errors
+      dispatch(updateError("")); 
       dispatch(updateInputText(input))
       dispatch(updateOnClick(true));
-      dispatch(updateLoading(true)); // Start loading indicator
+      dispatch(updateLoading(true));
     }
   }
 

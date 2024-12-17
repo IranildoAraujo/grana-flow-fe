@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useState, useContext } from 'react';
 import { AutenticacaoDTO } from '../../dto/autenticacao-dto';
+import { API_BASE_AUTH_URL } from '../../util/URLUtil/URLUtil';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -17,7 +18,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const auth = async (username: string, password: string): Promise<AutenticacaoDTO | null> => {
     try {
-      const response = await axios.post('http://localhost:8086/auth-service/api/auth/signin', {
+      const response = await axios.post(API_BASE_AUTH_URL, {
         username,
         password,
       });

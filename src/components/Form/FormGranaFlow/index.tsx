@@ -1,12 +1,12 @@
 import { Button, Form, Select, message } from 'antd';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { CurrencyInput } from '../../CurrencyInput';
 import { useAppDispatch } from '../../../store/hooks';
 import { updateOnSaved } from '../../../store/slices/formgranaflow';
-import './styles.css';
 import { useAuthenticatedHttpClient } from '../../../hooks';
 import { Tipo } from '../../dto/tipo-dto';
+import { API_BASE_URL } from '../../../util/URLUtil/URLUtil';
+import './styles.css';
 
 const { Option } = Select;
 
@@ -18,7 +18,7 @@ const FormGranaFlow: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const handleTiposCustos = () => {
-    httpClient.get<Tipo[]>('http://localhost:8080/grana-flow/api/v1/lancamentos/tipos-custos')
+    httpClient.get<Tipo[]>(`${API_BASE_URL}/lancamentos/tipos-custos`)
       .then(response => {
         setTiposCustos(response.data);
       })
@@ -39,7 +39,7 @@ const FormGranaFlow: React.FC = () => {
   const handleSubmit = () => {
     const valorCustoNumber = parseFloat(valorCusto.replace(/[^0-9,]/g, '').replace(',', '.'));
 
-    axios.post('http://localhost:8080/grana-flow/api/v1/lancamentos', {
+    httpClient.post(`${API_BASE_URL}/lancamentos`, {
       valorCusto: valorCustoNumber,
       tipoCusto: tipoCustoSelecionado
     })

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { applyPromptTemplateWithTools, createModelProvider, PromptTemplate } from "../../../util/ModelProvider";
-import { templatePtBr, answerPtBr, templatePtBr2 } from "../../../util/TemplateUtil";
+import { answerPtBr, templatePtBr2 } from "../../../util/TemplateUtil";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { updateError, updateLoading } from "../../../store/slices/chatInput";
 import ChatInput from "./ChatInput";
@@ -19,16 +19,6 @@ const MetaLLM: React.FC = () => {
     ).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}`
   }).join("\n");
 
-  // Configuração do modelo
-  /*const modelConfig = {
-    model: "google/flan-t5-base",
-    temperature: 0.05,
-    top_p: 0.85, // Reduzir diversidade
-    top_k: 40, // Priorizar termos relevantes
-    maxNewTokens: 250,
-    returnFullText: false,
-    verbose: true,
-  };*/
   const modelConfig = {
     model: "Qwen/Qwen2.5-Coder-32B-Instruct",
     temperature: 0.1,
@@ -66,7 +56,7 @@ const MetaLLM: React.FC = () => {
       dispatch(updateOutputText("Falha ao buscar a resposta."));
       dispatch(updateVerboseLogs(undefined));
     } finally {
-      dispatch(updateLoading(false)); // Start loading indicator
+      dispatch(updateLoading(false));
     }
   }, [    
     financialData,

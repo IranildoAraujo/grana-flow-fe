@@ -7,11 +7,10 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { updateLancamento, updateError } from '../../store/slices/lancamento';
 import { useAuthenticatedHttpClient } from '../../hooks';
 import './styles.css';
+import { API_BASE_URL } from '../../util/URLUtil/URLUtil';
 
 const TableGranaFlow: React.FC = () => {
     const httpClient = useAuthenticatedHttpClient();
-
-    const API_URL = 'http://localhost:8080/grana-flow/api/v1/lancamentos';
 
     const [lancamentos, setLancamentos] = useState<Lancamento[]>([]);
 
@@ -20,7 +19,7 @@ const TableGranaFlow: React.FC = () => {
 
     const buscarLancamentos = useCallback(async () => {
         try {
-            const response = await httpClient.get<Lancamento[]>(API_URL);
+            const response = await httpClient.get<Lancamento[]>(`${API_BASE_URL}/lancamentos`);
             const lancamentos = response.data.map(l => ({
                 ...l,
                 dataRegistro: new Date(l.dataRegistro) // Converte para Date

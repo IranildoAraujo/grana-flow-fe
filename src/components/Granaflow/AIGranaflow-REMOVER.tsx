@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuthenticatedHttpClient } from '../../hooks';
+import { API_BASE_URL } from '../../util/URLUtil/URLUtil';
 
 interface Lancamento {
   id?: number;
@@ -9,12 +11,12 @@ interface Lancamento {
 }
 
 const AIGranaflow: React.FC = () => {
+  const httpClient = useAuthenticatedHttpClient();
   const [lancamentos, setLancamentos] = useState<Lancamento[]>([]);
   const [resumoLLM, setResumoLLM] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const API_URL = 'http://localhost:8080/grana-flow/api/v1/lancamentos';
   const HUGGINGFACE_API_KEY = process.env.REACT_APP_HUGGINGFACE_API_KEY; // Certifique-se de configurar isso no seu .env
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const AIGranaflow: React.FC = () => {
 
   const buscarLancamentos = async () => {
     try {
-      const response = await axios.get<Lancamento[]>(API_URL);
+      const response = await httpClient.get<Lancamento[]>(`${API_BASE_URL}/lancamentos`);
       setLancamentos(response.data);
       if (response.data.length > 0) {
         gerarResumo(response.data);
@@ -38,7 +40,7 @@ const AIGranaflow: React.FC = () => {
 
   const gerarResumo = async (lancamentos: Lancamento[]) => {
     try {
-        setLoading(true);
+      setLoading(true);
       const lancamentosStr = lancamentos.map(l => `${l.tipoCusto}, ${l.valorCusto} gasto, ${l.ultimoCustoRegistrado} Data de registro`).join('\n');
       const prompt = `
         Dada a seguinte lista de lançamentos com valorCusto, tipoCusto e ultimoCustoRegistrado, gere um resumo que descreva as características gerais dessa lista.
@@ -61,21 +63,21 @@ const AIGranaflow: React.FC = () => {
 
       const generatedText = response.data.generated_text || response.data[0]?.generated_text;
 
-        if (typeof generatedText === "string"){
-            setResumoLLM(generatedText.trim());
-        }
-        else {
-            setResumoLLM("A LLM retornou uma resposta inválida ou vazia.");
-        }
+      if (typeof generatedText === "string") {
+        setResumoLLM(generatedText.trim());
+      }
+      else {
+        setResumoLLM("A LLM retornou uma resposta inválida ou vazia.");
+      }
 
     } catch (error) {
       console.error("Erro na chamada da LLM:", error);
       setResumoLLM("Erro ao gerar resumo.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
-  
+
   return (
     <div>
       <h1>Interface Dinâmica com LLM e API Spring</h1>
@@ -92,7 +94,7 @@ const AIGranaflow: React.FC = () => {
       <h2>Resumo da LLM</h2>
       {loading ? <p>Carregando...</p> : <p>{resumoLLM}</p>}
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
     </div>
   );
